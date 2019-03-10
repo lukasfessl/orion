@@ -1,0 +1,26 @@
+{% extends "front_base.html.twig" %}
+
+{% block content %}
+<div class="row">
+	<div class="col">
+	    {% if tilePack != null %}
+		<div class="card">
+			<div class="card-header">{{ tilePack.name }}</div>
+			<div class="card-body">
+				<ul class="tile-list">
+				{% for tile in tilePack.tiles %}
+					<li>
+    					<a href="{{ tile.link }}" class="btn btn-secondary badge">
+                    		<img src="{{ tile.icon }}">
+                    		<span class="button-content">{{ tile.name }}</span>
+            			</a>
+    				</li>
+				{% endfor  %}
+
+				</ul>
+			</div>
+		</div>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

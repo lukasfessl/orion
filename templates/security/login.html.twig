@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block content %}
+<form method="post">
+	<div id="login-wrapper">
+		<h1>Orion</h1>
+		<div id="login-content">
+			<div id="fields">
+    		    {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+    			<div class="form-group">
+    				<label for="inputEmail" class="sr-only">Email:</label>
+        		    <div class="input-group">
+                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" autofocus>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="sr-only">Password:</label>
+                    <div class="input-group">
+                        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password">
+    				</div>
+				</div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+
+			 	<div class="form-group">
+                    <button class="btn btn-block btn-blue-alt" type="submit">
+                    	LOGIN
+                    </button>
+                </div>
+            </div>
+
+            <div id="links">
+            	<a href="#" class="btn btn-block btn-md bg-facebook">
+            		<span class="glyph-icon icon-separator">
+            			<i class="glyph-icon icon-facebook"></i>
+            		</span>
+            		<span class="button-content">PŘIHLÁSIT SE PŘES FACEBOOK</span>
+        		</a>
+        		<a href="#" class="btn btn-block btn-md bg-twitter">
+        			<span class="glyph-icon icon-separator">
+        				<i class="glyph-icon icon-twitter"></i>
+        			</span>
+        			<span class="button-content">PŘIHLÁSIT SE PŘES TWITTER</span>
+    			</a>
+        		<a href="{{ path('app_registration') }}" class="btn btn-block btn-md bg-registration">
+        			<span class="glyph-icon icon-separator">
+        				<i class="glyph-icon icon-twitter"></i>
+        			</span>
+        			<span class="button-content">ZAREGISTROVAT SE</span>
+    			</a>
+			 </div>
+		</div>
+	</div>
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+
+</form>
+{% endblock %}

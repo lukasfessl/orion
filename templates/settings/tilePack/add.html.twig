@@ -1,0 +1,16 @@
+{% extends "settings_base.html.twig" %}
+
+{% block content %}
+<div class="row row-center">
+	<div class="col">
+		<div class="card">
+			<div class="card-header">Add Tile Pack</div>
+			<div class="card-body">
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                {{ form_end(form) }}
+            </div>
+		</div>
+	</div>
+</div>
+{% endblock %}

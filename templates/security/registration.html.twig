@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block content %}
+	<div id="login-wrapper">
+		<h1>Orion</h1>
+		<div id="login-content">
+			<div id="registration-content">
+    			{% form_theme form 'form/fields.html.twig' %}
+    		    {{ form_start(form) }}
+                      {{ form_widget(form) }}
+               {{ form_end(form) }}
+           </div>
+		</div>
+	</div>
+{% endblock %}

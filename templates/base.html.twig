@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link href="{{ asset('js/jquery.css') }}" rel="javascript" />
+        <link href="{{ asset('js/custom.css') }}" rel="javascript" />
+        {% block javascripts %}{% endblock %}
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Orion{% endblock %}</title>
+    </head>
+    <body>
+		{% block content %}
+			content here
+		{% endblock %}
+
+		{% block footer %}
+{# 			<div id="footer">#}
+{# 				&copy; Copyright 2019 by <a href="http://lukasfessl.cz">Lukáš Fessl</a>#}
+{# 			</div>#}
+		{% endblock %}
+
+    </body>
+</html>

@@ -1,0 +1,22 @@
+{% extends "settings_base.html.twig" %}
+
+{% block javascripts %}
+	<script src="{{ asset('js/pageScan.js') }}" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+<div class="row row-center">
+	<div class="col">
+		<div class="card">
+			<div class="card-header">Tile</div>
+			<div class="card-body">
+				<a href="#" id="scanPage">SCAN</a>
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                {{ form_end(form) }}
+            </div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
