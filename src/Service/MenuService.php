@@ -16,12 +16,16 @@ class MenuService {
 
     private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager) {
+    private $tokenStorage;
+
+    public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage) {
         $this->entityManager = $entityManager;
+        $this->tokenStorage = $tokenStorage;
     }
 
     public function getTilePacks() {
-        return $this->getTilePackRepository()->findBy([]);
+        $searchCriteria = ['user' => $this->tokenStorage->getToken()->getUser()->getId()];
+        return $this->getTilePackRepository()->findBy($searchCriteria);
     }
 
     /**

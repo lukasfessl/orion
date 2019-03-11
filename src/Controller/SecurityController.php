@@ -50,7 +50,7 @@ class SecurityController extends Controller {
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $userService->createUser($form->getData(), $form['password']->getData());
-            return new RedirectResponse($this->urlGenerator->generate('app_login'));
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('security/registration.html.twig', [
