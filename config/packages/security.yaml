@@ -4,8 +4,8 @@ security:
             algorithm: bcrypt
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
-    #providers:
-    #    in_memory: { memory: ~ }
+#    providers:
+#        in_memory: { memory: ~ }
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -31,7 +31,8 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY  }
-         - { path: ^/settings, roles: ROLE_ADMIN  }
+         - { path: ^/registration, roles: IS_AUTHENTICATED_ANONYMOUSLY  }
+         - { path: ^/, roles: ROLE_ADMIN  }
     providers:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:

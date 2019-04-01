@@ -1,16 +1,11 @@
 $(function() {
-
 	$(document).click(function(event) {
-		$(".dropdown-menu").removeClass("show");
+		$(".dropdown-menu" ).hide();
 
 	});
 
-	$(".dropdown-toggle").on('click', function() {
-		if ($(this).next().hasClass("show")) {
-			$(this).next().removeClass("show");
-		} else {
-			$(this).next().addClass("show");
-		}
+	$(".dropdown-toggle").click(function(event ) {
+		$(".dropdown-menu" ).toggle();
 		event.stopPropagation();
-	})
+	});
 });

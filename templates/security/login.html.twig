@@ -3,68 +3,67 @@
 {% block title %}Log in!{% endblock %}
 
 {% block content %}
-<form method="post">
-	<div id="login-wrapper">
-		<h1>Orion</h1>
-		<div id="login-content">
-			<div id="fields">
-    		    {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
-    			<div class="form-group">
-    				<label for="inputEmail" class="sr-only">Email:</label>
-        		    <div class="input-group">
-                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" autofocus>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword" class="sr-only">Password:</label>
-                    <div class="input-group">
-                        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password">
-    				</div>
-				</div>
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+<div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(../images/auth-bg.jpg) no-repeat center center;">
+    <div class="auth-box">
+        <div id="loginform">
+            <div class="logo">
+                <h3 class="font-medium mb-3">Sign In</h3>
+            </div>
+            <!-- Form -->
+            <div class="row">
+                <div class="col-12">
+                   <form method="post">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="material-icons">person_outline</i></span>
+                            </div>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" autofocus>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon2"><i class="material-icons">lock_open</i></span>
+                            </div>
+                            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+                        </div>
+                       	<div class="form-group row">
+                            <div class="col-md-12">
+                		    {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
+                            </div>
+                        </div>
 
-			 	<div class="form-group">
-                    <button class="btn btn-block btn-blue-alt" type="submit">
-                    	LOGIN
-                    </button>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <div class="custom-control custom-checkbox">
+                                    <input id="rememberMe" type="checkbox" name="_remember_me">
+                					<label for="rememberMe">Remember me</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-center">
+                            <div class="col-xs-12 pb-3">
+                                <button class="btn btn-block btn-lg btn-info" type="submit">Log In</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 mt-2 text-center">
+                                <div class="social">
+                                    <a href="javascript:void(0)" class="btn  btn-facebook" data-toggle="tooltip" title="" data-original-title="Login with Facebook"> <i aria-hidden="true" class="fab  fa-facebook"></i> </a>
+                                    <a href="javascript:void(0)" class="btn btn-googleplus" data-toggle="tooltip" title="" data-original-title="Login with Google"> <i aria-hidden="true" class="fab  fa-google-plus"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mb-0 mt-2">
+{#                             <div class="col-sm-12 text-center">#}
+{#                                 Don't have an account? <a href="authentication-register1.html" class="text-info ml-1"><b>Sign Up</b></a>#}
+{#                             </div>#}
+{#                         </div>#}
+                    </form>
                 </div>
             </div>
-
-            <div id="links">
-            	<a href="#" class="btn btn-block btn-md bg-facebook">
-            		<span class="glyph-icon icon-separator">
-            			<i class="glyph-icon icon-facebook"></i>
-            		</span>
-            		<span class="button-content">PŘIHLÁSIT SE PŘES FACEBOOK</span>
-        		</a>
-        		<a href="#" class="btn btn-block btn-md bg-twitter">
-        			<span class="glyph-icon icon-separator">
-        				<i class="glyph-icon icon-twitter"></i>
-        			</span>
-        			<span class="button-content">PŘIHLÁSIT SE PŘES TWITTER</span>
-    			</a>
-        		<a href="{{ path('app_registration') }}" class="btn btn-block btn-md bg-registration">
-        			<span class="glyph-icon icon-separator">
-        				<i class="glyph-icon icon-twitter"></i>
-        			</span>
-        			<span class="button-content">ZAREGISTROVAT SE</span>
-    			</a>
-			 </div>
-		</div>
-	</div>
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
         </div>
-    #}
-
-</form>
+    </div>
+</div>
 {% endblock %}

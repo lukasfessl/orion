@@ -15,10 +15,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SecurityController extends Controller {
 
-    public function __construct() {
-
-    }
-
     /**
      * @Route("/login", name="app_login")
      */
