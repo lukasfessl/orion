@@ -3,14 +3,22 @@
 {% block title %}Log in!{% endblock %}
 
 {% block content %}
-	<div id="login-wrapper">
-		<h1>Orion</h1>
-		<div id="login-content">
-			<div id="registration-content">
-    		    {{ form_start(form) }}
-                      {{ form_widget(form) }}
-               {{ form_end(form) }}
-           </div>
+<div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(../images/auth-bg.jpg) no-repeat center center;">
+    <div class="auth-box">
+        <div id="loginform">
+            <div class="logo">
+                <h3 class="font-medium mb-3">Registration</h3>
+            </div>
+            <!-- Form -->
+		    {{ form_start(form) }}
+                {{ form_widget(form) }}
+            {{ form_end(form) }}
+			<div class="form-group mb-0 mt-2">
+                <div class="col-sm-12 text-center">
+                    Already have an account? <a href="{{ path('app_login') }}" class="text-info ml-1"><b>Sign In</b></a>
+                </div>
+            </div>
 		</div>
 	</div>
+</div>
 {% endblock %}

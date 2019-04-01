@@ -17,13 +17,13 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="material-icons">person_outline</i></span>
                             </div>
-                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" autofocus>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control form-control-lg" placeholder="Email" autofocus>
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon2"><i class="material-icons">lock_open</i></span>
                             </div>
-                            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password">
+                            <input type="password" name="password" id="inputPassword" class="form-control form-control-lg" placeholder="Password">
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
                         </div>
                        	<div class="form-group row">
@@ -56,10 +56,10 @@
                             </div>
                         </div>
                         <div class="form-group mb-0 mt-2">
-{#                             <div class="col-sm-12 text-center">#}
-{#                                 Don't have an account? <a href="authentication-register1.html" class="text-info ml-1"><b>Sign Up</b></a>#}
-{#                             </div>#}
-{#                         </div>#}
+                            <div class="col-sm-12 text-center">
+                                Don't have an account? <a href="{{ path('app_registration') }}" class="text-info ml-1"><b>Sign Up</b></a>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
