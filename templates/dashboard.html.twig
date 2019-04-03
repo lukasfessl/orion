@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Orion{% endblock %}
+
+{% block content %}
+	<div class="topbar">
+		{% if app.user %}
+			<div class="right-bar">
+    {#     		<span class="header-icon for-view">#}
+    {#     			<a href="{{ path('app_front_homepage_edit') }}" id="edit-content"><i class="fas fa-pencil-alt fa-lg"></i></a>#}
+    {#     		</span>#}
+        		<a href="#" class="dropdown-toggle text-white">{{ app.user.email }}</a>
+        		<div class="user-menu dropdown-menu">
+        			<a href="{{ path('logout') }}">Logout</a>
+        		</div>
+    		</div>
+    	{% else %}
+    		<a href="{{ path('app_login') }}">Login</a>
+    	{% endif %}
+	</div>
+
+	<div class="left-sidebar">
+        <div class="scroll-sidebar">
+            <div class="sidebar-nav">
+                <ul id="sidebarnav" class="in">
+                	<li class="p-15 m-t-10">
+                		<a href="javascript:void(0)" class="btn btn-block create-btn text-white no-block d-flex align-items-center active">
+                			<i class="material-icons">add_box</i> <span class="hide-menu m-l-5">Create New Bookmark</span>
+                		</a>
+            		</li>
+        			{% for tilePack in tilePacks %}
+        				<li class="sidebar-item {% if app.request.attributes.get('id') == tilePack.id %} selected{% endif %}">
+        					<a href="{{ path('app_dashboard_detail', {id: tilePack.id}) }}" class="sidebar-link waves-effect waves-dark sidebar-link">
+        					    <i class="material-icons">image_search</i><span class="m-l-5">{{ tilePack.name }}</span>
+        					</a>
+    					</li>
+        			{% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+	<div class="page-wrapper">
+    	<div class="container-fluid">
+    		<div class="row">
+    			<div class="col-lg-12 col-xlg-3 col-md-5">
+                    <div class="card">
+                        <div class="card-body">
+                            {% if tiles is defined %}
+                                <ul>
+           							{% for tile in tiles %}
+                        				<li class="sidebar-item">
+                        					<a href="{{ tile.link }}" target="_blank" class="">{{ tile.name }}</a>
+                    					</li>
+                        			{% endfor %}
+                    			</ul>
+                			{% endif %}
+                        </div>
+                    </div>
+                </div>
+    		</div>
+    	</div>
+	</div>
+
+{% endblock %}

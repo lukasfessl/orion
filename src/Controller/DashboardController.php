@@ -12,14 +12,31 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Service\ManagementService;
+use App\Entity\Tile;
+use App\Entity\TilePack;
 
 class DashboardController extends Controller {
 
     /**
      * @Route("/")
      */
-    public function DefaultAction(AuthenticationUtils $authenticationUtils): Response {
-        return $this->render('homepage.html.twig');
+    public function DefaultAction(ManagementService $managementService): Response {
+        $tilePacks = $managementService->getTilePacks(['user' => $this->getUser()->getId()]);
+        return $this->render('dashboard.html.twig', [
+                'tilePacks' => $tilePacks
+        ]);
+    }
+
+    /**
+     * @Route("/{id}")
+     */
+    public function DetailAction(TilePack $tilePack, ManagementService $managementService): Response {
+        $tilePacks = $managementService->getTilePacks(['user' => $this->getUser()->getId()]);
+        return $this->render('dashboard.html.twig', [
+                'tilePacks' => $tilePacks,
+                'tiles' => $tilePack->getTiles(),
+        ]);
     }
 
 }
