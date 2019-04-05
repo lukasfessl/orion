@@ -24,7 +24,7 @@
             <div class="sidebar-nav">
                 <ul id="sidebarnav" class="in">
                 	<li class="p-15 m-t-10">
-                		<a href="javascript:void(0)" class="btn btn-block create-btn text-white no-block d-flex align-items-center active">
+                		<a href="#" data="create-bookmark" class="btn btn-block create-btn text-white no-block d-flex align-items-center active">
                 			<i class="material-icons">add_box</i> <span class="hide-menu m-l-5">Create New Bookmark</span>
                 		</a>
             		</li>
@@ -61,5 +61,8 @@
     		</div>
     	</div>
 	</div>
+
+    {% include 'modal/create_bookmark.html.twig' %}
+
 
 {% endblock %}

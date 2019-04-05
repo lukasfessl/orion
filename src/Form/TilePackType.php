@@ -15,7 +15,7 @@ class TilePackType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
             ->add("name", TextType::class, [
-                "required" => true,
+                "required" => false,
             ])
             ->add("slug", TextType::class, [
                     "required" => true,
