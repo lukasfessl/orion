@@ -14,8 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Service\ManagementService;
 use App\Entity\Tile;
-use App\Entity\TilePack;
-use App\Form\TilePackType;
+use App\Entity\Bookmark;
+use App\Form\BookmarkType;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Encoder\JsonEncode;
@@ -29,23 +29,27 @@ class DashboardController extends Controller {
      * @Route("/")
      */
     public function DefaultAction(ManagementService $managementService): Response {
-        $tilePacks = $managementService->getTilePacks(['user' => $this->getUser()->getId()]);
+        $bookmarks = $managementService->getBookmarks(['user' => $this->getUser()->getId()]);
+
+        $form = $this->createForm(BookmarkType::class, new Bookmark());
+
         return $this->render('dashboard.html.twig', [
-                'tilePacks' => $tilePacks
+                'bookmarks' => $bookmarks,
+                'form' => $form->createView()
         ]);
     }
 
     /**
      * @Route("/{id}", requirements={"id"="\d+"})
      */
-    public function DetailAction(TilePack $tilePack, ManagementService $managementService): Response {
-        $tilePacks = $managementService->getTilePacks(['user' => $this->getUser()->getId()]);
+    public function DetailAction(Bookmark $bookmark, ManagementService $managementService): Response {
+        $bookmarks = $managementService->getBookmarks(['user' => $this->getUser()->getId()]);
 
-        $form = $this->createForm(TilePackType::class, new TilePack());
+        $form = $this->createForm(BookmarkType::class, new Bookmark());
 
         return $this->render('dashboard.html.twig', [
-                'tilePacks' => $tilePacks,
-                'tiles' => $tilePack->getTiles(),
+                'bookmarks' => $bookmarks,
+                'tiles' => $bookmark->getTiles(),
                 'form' => $form->createView()
         ]);
     }
@@ -58,7 +62,7 @@ class DashboardController extends Controller {
         $data = $request->getContent();
         $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
 
-        $bookmark = $serializer->deserialize($data, TilePack::class, 'json');
+        $bookmark = $serializer->deserialize($data, Bookmark::class, 'json');
         $bookmark->setUser($userId);
         $errors = $validator->validate($bookmark);
         if (count($errors) > 0) {
@@ -66,7 +70,7 @@ class DashboardController extends Controller {
                 'errors' => json_encode($this->getErrorMessages($errors)),
             ], 400);
         }
-        $bookmark = $managementService->saveTilePack($bookmark);
+        $bookmark = $managementService->saveBookmark($bookmark);
 
         return new JsonResponse();
     }

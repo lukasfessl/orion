@@ -2,10 +2,10 @@
 
 namespace App\Service;
 
-use App\Repository\TilePackRepository;
+use App\Repository\BookmarkRepository;
 use App\Repository\TileRepository;
 use Symfony\Component\Security\Core\Security;
-use App\Entity\TilePack;
+use App\Entity\Bookmark;
 use App\Entity\Tile;
 use Exception;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,28 +23,28 @@ class ManagementService {
         $this->tokenStorage = $tokenStorage;
     }
 
-    public function getTilePacks($criteria) {
-        return $this->getTilePackRepository()->findBy($criteria);
+    public function getBookmarks($criteria) {
+        return $this->getBookmarkRepository()->findBy($criteria);
     }
 
-    public function getTilePack($criteria) {
-        return $this->getTilePackRepository()->findOneBy($criteria);
+    public function getBookmark($criteria) {
+        return $this->getBookmarkRepository()->findOneBy($criteria);
     }
 
-    public function getTilePackById($id) {
-        return $this->getTilePackRepository()->find($id);
+    public function getBookmarkById($id) {
+        return $this->getBookmarkRepository()->find($id);
     }
 
-    public function saveTilePack(TilePack $tilePack) {
-        $tilePack->setUser($this->tokenStorage->getToken()->getUser()->getId());
-        return $this->getTilePackRepository()->save($tilePack);
+    public function saveBookmark(Bookmark $bookmark) {
+        $bookmark->setUser($this->tokenStorage->getToken()->getUser()->getId());
+        return $this->getBookmarkRepository()->save($bookmark);
     }
 
     /**
-     * @return TilePackRepository
+     * @return BookmarkRepository
      */
-    public function getTilePackRepository() {
-        return $this->entityManager->getRepository(TilePack::class);
+    public function getBookmarkRepository() {
+        return $this->entityManager->getRepository(Bookmark::class);
     }
 
     /**

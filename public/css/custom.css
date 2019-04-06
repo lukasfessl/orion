@@ -1,3 +1,27 @@
 .alert-danger {
 	color: red;
 }
+
+.required:after {
+	content:" * ";
+	color: red;
+}
+
+h3 {
+	margin: 0px;
+}
+
+ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.errors {
+	font-size: 11px;
+	color: red;
+}
+
+.b-c-r {
+	border-color: red;
+}

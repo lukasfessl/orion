@@ -32,9 +32,9 @@ class Tile {
     private $icon;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TilePack", inversedBy="tile")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Bookmark", inversedBy="tile")
      */
-    private $tilePack;
+    private $bookmark;
 
     /**
      * @ORM\Column(name="new_window", type="boolean")
@@ -80,11 +80,11 @@ class Tile {
         return $this->newWindow;
     }
 
-    public function setTilePack($tilePack) {
-        $this->tilePack = $tilePack;
+    public function setBookmark($bookmark) {
+        $this->bookmark = $bookmark;
     }
-    public function getTilePack() {
-        return $this->tilePack;
+    public function getBookmark() {
+        return $this->bookmark;
     }
 
 }

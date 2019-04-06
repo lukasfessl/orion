@@ -1,16 +1,17 @@
-<div class="modal-dialog modal-lg create-bookmark">
+<div class="modal-dialog modal-lg create-bookmark" style="display:none">
 	<div class="modal-content">
-		<div class="modal-header">Header</div>
+		{% form_theme form 'form/fields.html.twig' %}
+        {{ form_start(form) }}
+		<div class="modal-header"><h3>Create new Bookmark</h3></div>
 		<div class="modal-body">
-            {{ form_start(form) }}
-            	{{ form_widget(form) }}
-            {{ form_end(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.icon) }}
         </div>
-   		<div class="modal-footer">Footer</div>
+   		<div class="modal-footer">{{ form_row(form.save) }}</div>
+        {{ form_end(form) }}
     </div>
 </div>
-<div class="modal-backdrop fade show"></div>
-
+<div class="modal-backdrop fade show" style="display:none"></div>
 
 
 
@@ -27,7 +28,7 @@ $(function() {
 		$(".modal-backdrop").show();
 	});
 
-	$("form[name=tile_pack]").on('submit', function(e) {
+	$("form[name=bookmark]").on('submit', function(e) {
 		e.preventDefault();
 		let data = {};
         $(this).serializeArray().forEach((object)=>{
@@ -36,10 +37,17 @@ $(function() {
         });
 
 		$.post("{{ path('app_dashboard_createbookmark') }}", JSON.stringify(data))
-		.fail(function( data ) {
-			console.log(data.responseJSON);
-            console.log(JSON.stringify(data));
+		.fail(function(data) {
+            $.each(JSON.parse(data.responseJSON.errors),function(index, value){
+            	var errorHtml = $("<ul class='errors'></ul>");
+            	value.forEach(function(errro) {
+            		errorHtml.append("<li>" + errro + "</li>");
+        		});
+            	$("#bookmark_" + index).after(errorHtml);
+            	$("#bookmark_" + index).addClass('b-c-r');
+            });
 		}).done(function(data) {
+			location.reload();
 			console.log(data);
         });
 	});

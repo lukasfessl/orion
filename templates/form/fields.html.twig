@@ -1,0 +1,68 @@
+{# templates/form/fields.html.twig #}
+{% block form_row %}
+   <div class="form-row mb-3">
+   		{% if 'checkbox' in block_prefixes %}
+            {{ form_widget(form) }}
+            {{ form_label(form) }}
+   		{% else %}
+            {{ form_label(form) }}
+            {{ form_widget(form) }}
+        {% endif %}
+        {{ form_errors(form) }}
+	</div>
+{% endblock %}
+
+{%- block widget_attributes -%}
+    id="{{ id }}" name="{{ full_name }}"
+    {%- if disabled %} disabled="disabled"{% endif -%}
+{#     {%- if required %} required="required"{% endif -%}#}
+    {{ block('attributes') }}
+{%- endblock widget_attributes -%}
+
+{%- block form_widget_simple -%}
+    {%- set type = type|default('text') -%}
+
+    {%- if class is defined -%}
+    	{%- set class = class ~ " form-control"  %}
+    {%- else -%}
+    	{%- set class = "form-control" %}
+    {%- endif -%}
+    {%- if required -%}
+    	{%- set class = class ~ " required"  %}
+    {%- endif -%}
+
+    {%- if errors|length > 0 -%}
+        {%- set class = class ~ " error"  %}
+    {%- endif -%}
+
+    <input type="{{ type }}" {{ block('widget_attributes') }} {%- if class is defined -%} class="{{ class }}" {% endif %} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{%- endblock form_widget_simple -%}
+
+
+{# {%- block button_widget -%}#}
+{#     {%- if label is empty -%}#}
+{#         {%- if label_format is not empty -%}#}
+{#             {% set label = label_format|replace({#}
+{#                 '%name%': name,#}
+{#                 '%id%': id,#}
+{#             }) %}#}
+{#         {%- elseif label is same as(false) -%}#}
+{#             {% set translation_domain = false %}#}
+{#         {%- else -%}#}
+{#             {% set label = name|humanize %}#}
+{#         {%- endif -%}#}
+{#     {%- endif -%}#}
+{#     <div class="form-group">#}
+{#     	<button type="{{ type|default('button') }}"  class="btn btn-block btn-blue-alt" {{ block('button_attributes') }}>{{ label }}</button>#}
+{#     </div>#}
+{# {%- endblock button_widget -%}#}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+    <ul class="error">
+        {%- for error in errors -%}
+            <li>{{ error.message }}</li>
+        {%- endfor -%}
+    </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}

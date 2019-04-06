@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\TilePack;
+use App\Entity\Bookmark;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -10,20 +10,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
-class TilePackType extends AbstractType {
+class BookmarkType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
             ->add("name", TextType::class, [
-                "required" => false,
-            ])
-            ->add("slug", TextType::class, [
-                    "required" => true,
+                "required" => true,
             ])
             ->add("icon", TextType::class, [
-                    "required" => false,
-            ])
-            ->add("active", CheckboxType::class, [
                     "required" => true,
             ])
             ->add("save", SubmitType::class);
@@ -31,7 +25,7 @@ class TilePackType extends AbstractType {
 
     public function configureOption(OptionsResolver $resolver) {
         $resolver->setDefaults([
-            'data_class' => TilePack::class,
+            'data_class' => Bookmark::class,
         ]);
     }
 }

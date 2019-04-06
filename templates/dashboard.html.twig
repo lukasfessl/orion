@@ -25,13 +25,14 @@
                 <ul id="sidebarnav" class="in">
                 	<li class="p-15 m-t-10">
                 		<a href="#" data="create-bookmark" class="btn btn-block create-btn text-white no-block d-flex align-items-center active">
-                			<i class="material-icons">add_box</i> <span class="hide-menu m-l-5">Create New Bookmark</span>
+                			<i class="material-icons">add_box</i><span class="hide-menu m-l-5">Create New Bookmark</span>
                 		</a>
             		</li>
-        			{% for tilePack in tilePacks %}
-        				<li class="sidebar-item {% if app.request.attributes.get('id') == tilePack.id %} selected{% endif %}">
-        					<a href="{{ path('app_dashboard_detail', {id: tilePack.id}) }}" class="sidebar-link waves-effect waves-dark sidebar-link">
-        					    <i class="material-icons">image_search</i><span class="m-l-5">{{ tilePack.name }}</span>
+        			{% for bookmark in bookmarks %}
+        				<li class="sidebar-item {% if app.request.attributes.get('id') == bookmark.id %} selected{% endif %}">
+        					<a href="{{ path('app_dashboard_detail', {id: bookmark.id}) }}" class="sidebar-link waves-effect waves-dark sidebar-link">
+        					    <i class="material-icons">{% if bookmark.icon is not null %}{{ bookmark.icon }}{% else %}add_box{% endif %}</i>
+        					    <span class="m-l-5 m-t-2">{{ bookmark.name }}</span>
         					</a>
     					</li>
         			{% endfor %}

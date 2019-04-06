@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TilePackRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\BookmarkRepository")
  */
-class TilePack {
+class Bookmark {
 
     /**
      * @ORM\Id
@@ -24,26 +24,15 @@ class TilePack {
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     */
-    private $slug;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank
      */
     private $icon;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Tile", mappedBy="tilePack")
+     * @ORM\OneToMany(targetEntity="App\Entity\Tile", mappedBy="bookmark")
      */
     private $tiles;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $active;
 
     /**
      * @ORM\Column(type="integer")
@@ -65,13 +54,6 @@ class TilePack {
         $this->name = $name;
     }
 
-    public function setSlug($slug) {
-        $this->slug = $slug;
-    }
-    public function getSlug() {
-        return $this->slug;
-    }
-
     public function setIcon($icon) {
         $this->icon = $icon;
     }
@@ -84,13 +66,6 @@ class TilePack {
     }
     public function getTiles() {
         return $this->tiles;
-    }
-
-    public function setActive($active) {
-        $this->active = $active;
-    }
-    public function getActive() {
-        return $this->active;
     }
 
     public function setUser($user) {
