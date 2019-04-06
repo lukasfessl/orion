@@ -9,16 +9,20 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class BookmarkType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
+            ->add("id", HiddenType::class, [
+                "required" => false,
+            ])
             ->add("name", TextType::class, [
                 "required" => true,
             ])
             ->add("icon", TextType::class, [
-                    "required" => true,
+                "required" => false,
             ])
             ->add("save", SubmitType::class);
     }

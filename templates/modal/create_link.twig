@@ -1,8 +1,8 @@
-<div class="modal-dialog modal-lg create-bookmark" style="display:none">
+<div class="modal-dialog modal-lg create-link" style="display:none">
 	<div class="modal-content">
 		{% form_theme form 'form/fields.html.twig' %}
         {{ form_start(form) }}
-		<div class="modal-header"><h3>Create new Bookmark</h3></div>
+		<div class="modal-header"><h3>Create new Link</h3></div>
 		<div class="modal-body">
             {{ form_row(form.name) }}
             {{ form_row(form.icon) }}
@@ -19,16 +19,16 @@
 
 $(function() {
 	$(".modal-backdrop").click(function() {
-		$(".create-bookmark").hide();
+		$(".create-link").hide();
 		$(".modal-backdrop").hide();
 	});
 
 
 	// delete
-	$("a[data=delete-bookmark]").click(function() {
+	$("a[data=delete-link]").click(function() {
 		var id = $(this).attr("data-id");
 		if (id) {
-			$.post("{{ path('app_dashboard_deletebookmark') }}", { bookmarkId: id})
+			$.post("{{ path('app_dashboard_deletelink') }}", { linkId: id})
 			.done(function(data) {
 				if (data.data == "ok") {
 					location.reload();
@@ -38,16 +38,16 @@ $(function() {
 	});
 
 	// map modal
-	$("a[data=create-bookmark]").click(function() {
-		$(".create-bookmark").show();
+	$("a[data=create-link]").click(function() {
+		$(".create-link").show();
 		$(".modal-backdrop").show();
 
 		var id = $(this).attr("data-id");
 		if (id) {
-			$.get("{{ path('app_dashboard_getbookmark') }}", { bookmarkId: id}, function(data) {
+			$.get("{{ path('app_dashboard_getlink') }}", { linkId: id}, function(data) {
 				var j = JSON.parse(data.data);
 				$.each(j, function(index, value) {
-					$("#bookmark_" + index).val(value)
+					$("#link_" + index).val(value)
         		});
 
 			});
@@ -56,7 +56,7 @@ $(function() {
 
 
 	// create or update
-	$("form[name=bookmark]").on('submit', function(e) {
+	$("form[name=link]").on('submit', function(e) {
 		e.preventDefault();
 		let data = {};
         $(this).serializeArray().forEach((object)=>{
@@ -64,15 +64,15 @@ $(function() {
       		data[key] =  object.value;
         });
 
-		$.post("{{ path('app_dashboard_createbookmark') }}", JSON.stringify(data))
+		$.post("{{ path('app_dashboard_createlink') }}", JSON.stringify(data))
 		.fail(function(data) {
             $.each(JSON.parse(data.responseJSON.errors),function(index, value){
             	var errorHtml = $("<ul class='errors'></ul>");
             	value.forEach(function(errro) {
             		errorHtml.append("<li>" + errro + "</li>");
         		});
-            	$("#bookmark_" + index).after(errorHtml);
-            	$("#bookmark_" + index).addClass('b-c-r');
+            	$("#link_" + index).after(errorHtml);
+            	$("#link_" + index).addClass('b-c-r');
             });
 		}).done(function(data) {
 			location.reload();

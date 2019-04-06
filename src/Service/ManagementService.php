@@ -40,6 +40,10 @@ class ManagementService {
         return $this->getBookmarkRepository()->save($bookmark);
     }
 
+    public function deleteBookmark(Bookmark $bookmark) {
+        $this->getBookmarkRepository()->delete($bookmark);
+    }
+
     /**
      * @return BookmarkRepository
      */

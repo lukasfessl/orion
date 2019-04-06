@@ -75,6 +75,39 @@ class DashboardController extends Controller {
         return new JsonResponse();
     }
 
+    /**
+     * @Route("/getBookmark")
+     */
+    public function GetBookmarkAction(Request $reques, ManagementService $managementService) {
+        // TODO add check
+        $bookmarkId = $reques->get('bookmarkId');
+        $userId = $this->getUser()->getId();
+        $bookmark = $managementService->getBookmarkById($bookmarkId);
+        // TODO add check to user
+        $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
+        $data = $serializer->serialize($bookmark, 'json');
+
+        return new JsonResponse([
+                'data' => $data,
+        ]);
+    }
+
+    /**
+     * @Route("/deleteBookmark")
+     */
+    public function DeleteBookmarkAction(Request $reques, ManagementService $managementService) {
+        // TODO add check
+        $bookmarkId = $reques->get('bookmarkId');
+        $userId = $this->getUser()->getId();
+        $bookmark = $managementService->getBookmarkById($bookmarkId);
+        // TODO add check to user
+        $managementService->deleteBookmark($bookmark);
+
+        return new JsonResponse([
+            'data' => 'ok'
+        ]);
+    }
+
     protected function getErrorMessages($violations) {
         $errors = array();
         foreach ($violations as $violation) {

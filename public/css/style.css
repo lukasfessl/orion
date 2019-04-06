@@ -343,16 +343,26 @@ a {
 .sidebar-nav ul .sidebar-item .sidebar-link {
     color: #fff;
     padding: 14px 15px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+/*     display: -webkit-box; */
+/*     display: -ms-flexbox; */
+/*     display: flex; */
     white-space: nowrap;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
     line-height: 25px;
     opacity: 0.6;
+    width: 210px;
 }
+
+.sidebar-link span {
+	position: absolute;
+}
+
+.sidebar-link i {
+	width: 25px;
+}
+
 .waves-effect {
     position: relative;
     cursor: pointer;
@@ -484,6 +494,40 @@ a {
     margin-right: -5px;
     margin-left: -5px;
 }
+
+.button-sub-nav {
+    position: absolute;
+    opacity: 0.2;
+    margin-top: 15px;
+}
+
+.sidebar-item:hover .button-sub-nav {
+	opacity: 0.8;
+}
+
+.sub-nav {
+	border: 1px solid #c0c0c0;
+	width: 100px;
+ 	position: absolute;
+    left: 210px;
+    margin-top: -20px;
+    display: none;
+    background-color: white;
+    z-index: 10;
+}
+
+.sub-nav a {
+	display: block;
+	padding: 4px;
+	color: black;
+	opacity: 0.6;
+}
+
+.sub-nav a:hover {
+	opacity: 0.9;
+}
+
+
 
 /* MODAL */
 
