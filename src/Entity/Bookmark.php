@@ -29,7 +29,7 @@ class Bookmark {
     private $icon;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Link", mappedBy="bookmark")
+     * @ORM\OneToMany(targetEntity="App\Entity\Link", mappedBy="bookmark", cascade={"remove"})
      */
     private $links;
 

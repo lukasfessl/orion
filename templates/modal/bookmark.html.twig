@@ -28,10 +28,10 @@ $(function() {
 	$("a[data=delete-bookmark]").click(function() {
 		var id = $(this).attr("data-id");
 		if (id) {
-			$.post("{{ path('app_dashboard_deletebookmark') }}", { bookmarkId: id})
+			$.post("{{ path('deleteBookmark') }}", { bookmarkId: id})
 			.done(function(data) {
 				if (data.data == "ok") {
-					location.reload();
+					window.location.replace("{{ path("app_dashboard_default") }}");
 				}
 	        })
 		}
@@ -44,7 +44,7 @@ $(function() {
 
 		var id = $(this).attr("data-id");
 		if (id) {
-			$.get("{{ path('app_dashboard_getbookmark') }}", { bookmarkId: id}, function(data) {
+			$.get("{{ path('getBookmark') }}", { bookmarkId: id}, function(data) {
 				var j = JSON.parse(data.data);
 				$.each(j, function(index, value) {
 					$("#bookmark_" + index).val(value)
@@ -64,7 +64,7 @@ $(function() {
       		data[key] =  object.value;
         });
 
-		$.post("{{ path('app_dashboard_createbookmark') }}", JSON.stringify(data))
+		$.post("{{ path('saveBookmark') }}", JSON.stringify(data))
 		.fail(function(data) {
             $.each(JSON.parse(data.responseJSON.errors),function(index, value){
             	var errorHtml = $("<ul class='errors'></ul>");

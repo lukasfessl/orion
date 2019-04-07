@@ -31,7 +31,7 @@ $(function() {
 	$("a[data=delete-link]").click(function() {
 		var id = $(this).attr("data-id");
 		if (id) {
-			$.post("{{ path('app_dashboard_deletelink') }}", { linkId: id})
+			$.post("{{ path('deleteLink') }}", { linkId: id})
 			.done(function(data) {
 				if (data.data == "ok") {
 					location.reload();
@@ -47,7 +47,7 @@ $(function() {
 
 		var id = $(this).attr("data-id");
 		if (id) {
-			$.get("{{ path('app_dashboard_getlink') }}", { linkId: id}, function(data) {
+			$.get("{{ path('getLink') }}", { linkId: id}, function(data) {
 				var j = JSON.parse(data.data);
 				$.each(j, function(index, value) {
 					$("#link_" + index).val(value)
@@ -66,10 +66,7 @@ $(function() {
             var key = object.name.substring(object.name.lastIndexOf("[") + 1, object.name.lastIndexOf("]"));
             data[key] =  object.value;
         });
-//         data['bookmarkId'] = $(this).attr("data-bookmark-id");
-//         console.log($(this));
-//         var bookmarkId = $(this).attr("data-bookmark-id");
-		$.post("{{ path('app_dashboard_createlink') }}", JSON.stringify(data))
+		$.post("{{ path('saveLink') }}", JSON.stringify(data))
 		.fail(function(data) {
             $.each(JSON.parse(data.responseJSON.errors),function(index, value){
             	var errorHtml = $("<ul class='errors'></ul>");

@@ -50,7 +50,7 @@
     	<div class="container-fluid">
     		<div class="row">
     			<div class="col-md-5 m-b-10 w-a">
-            		<a href="#" data="create-link" data-bookmark-id="{{ selectedBookmark.id }}" class="btn btn-block create-btn text-white no-block d-flex align-items-center active">
+            		<a href="#" data="create-link" class="btn btn-block create-btn text-white no-block d-flex align-items-center active">
             			<i class="material-icons">add_box</i><span class="hide-menu m-l-5">Add link</span>
             		</a>
         		</div>
@@ -77,8 +77,8 @@
     	</div>
 	</div>
 
-    {% include 'modal/create_bookmark.html.twig' %}
+    {% include 'modal/bookmark.html.twig' %}
 
-    {% include 'modal/create_link.html.twig' %}
+    {% include 'modal/link.html.twig' %}
 
 {% endblock %}
