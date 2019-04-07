@@ -2,15 +2,12 @@
 
 namespace App\Service;
 
-use App\Repository\BookmarkRepository;
-use App\Repository\TileRepository;
-use Symfony\Component\Security\Core\Security;
 use App\Entity\Bookmark;
-use App\Entity\Tile;
-use Exception;
+use App\Entity\Link;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use App\Repository\BookmarkRepository;
+use App\Repository\LinkRepository;
 
 class ManagementService {
 
@@ -46,16 +43,16 @@ class ManagementService {
 
 
 
-    public function saveLink(Tile $link) {
-        return $this->getTileRepository()->save($link);
+    public function saveLink(Link $link) {
+        return $this->getLinkRepository()->save($link);
     }
 
-    public function deleteLink(Tile $tile) {
-        return $this->getTileRepository()->delete($tile);
+    public function deleteLink(Link $link) {
+        return $this->getLinkRepository()->delete($link);
     }
 
     public function getLinkById($id) {
-        return $this->getTileRepository()->find($id);
+        return $this->getLinkRepository()->find($id);
     }
 
     /**
@@ -66,9 +63,9 @@ class ManagementService {
     }
 
     /**
-     * @return TileRepository
+     * @return LinkRepository
      */
-    public function getTileRepository() {
-        return $this->entityManager->getRepository(Tile::class);
+    public function getLinkRepository() {
+        return $this->entityManager->getRepository(Link::class);
     }
 }

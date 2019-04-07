@@ -2,28 +2,21 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use App\Entity\User;
-use App\Form\UserType;
-use Symfony\Component\HttpFoundation\Request;
-use App\Service\UserService;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use App\Service\ManagementService;
-use App\Entity\Tile;
 use App\Entity\Bookmark;
+use App\Entity\Link;
 use App\Form\BookmarkType;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Encoder\JsonEncode;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use App\Form\LinkType;
+use App\Service\ManagementService;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use App\Form\TileType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends Controller {
 
@@ -32,7 +25,6 @@ class DashboardController extends Controller {
      */
     public function DefaultAction(ManagementService $managementService): Response {
         $bookmarks = $managementService->getBookmarks(['user' => $this->getUser()->getId()]);
-
         $form = $this->createForm(BookmarkType::class, new Bookmark());
 
         return $this->render('dashboard.html.twig', [
@@ -48,12 +40,12 @@ class DashboardController extends Controller {
         $bookmarks = $managementService->getBookmarks(['user' => $this->getUser()->getId()]);
 
         $form = $this->createForm(BookmarkType::class, new Bookmark());
-        $formLink = $this->createForm(TileType::class, new Tile(), ['data' => ['bookmarks' => $bookmarks]]);
+        $formLink = $this->createForm(LinkType::class, new Link(), ['data' => ['bookmarks' => $bookmarks]]);
 
         return $this->render('dashboard.html.twig', [
                 'bookmarks' => $bookmarks,
                 'selectedBookmark' => $bookmark,
-                'tiles' => $bookmark->getTiles(),
+                'links' => $bookmark->getLinks(),
                 'form' => $form->createView(),
                 'formLink' => $formLink->createView()
         ]);
@@ -90,7 +82,7 @@ class DashboardController extends Controller {
         $bookmark = $managementService->getBookmarkById($bookmarkId);
         // TODO add check to user
         $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
-        $bookmark->setTiles(null);
+        $bookmark->setLinks(null);
         $data = $serializer->serialize($bookmark, 'json');
 
         return new JsonResponse([
@@ -128,7 +120,7 @@ class DashboardController extends Controller {
 
         $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
 
-        $link = $serializer->deserialize($data, Tile::class, 'json');
+        $link = $serializer->deserialize($data, Link::class, 'json');
 //         var_dump($link);
         $errors = $validator->validate($link);
 //         var_dump($errors);

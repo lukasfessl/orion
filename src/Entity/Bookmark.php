@@ -29,9 +29,9 @@ class Bookmark {
     private $icon;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Tile", mappedBy="bookmark")
+     * @ORM\OneToMany(targetEntity="App\Entity\Link", mappedBy="bookmark")
      */
-    private $tiles;
+    private $links;
 
     /**
      * @ORM\Column(type="integer")
@@ -60,11 +60,11 @@ class Bookmark {
         return $this->icon;
     }
 
-    public function setTiles($tiles) {
-        $this->tiles = $tiles;
+    public function setLinks($links) {
+        $this->links = $links;
     }
-    public function getTiles() {
-        return $this->tiles;
+    public function getLinks() {
+        return $this->links;
     }
 
     public function setUser($user) {

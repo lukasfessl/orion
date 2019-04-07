@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TileRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\LinkRepository")
  */
-class Tile {
+class Link {
 
     /**
      * @ORM\Id
@@ -35,7 +35,7 @@ class Tile {
     private $icon;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Bookmark", inversedBy="tile")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Bookmark", inversedBy="link")
      * @Assert\NotBlank
      */
     private $bookmark;

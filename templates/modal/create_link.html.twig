@@ -50,7 +50,7 @@ $(function() {
 			$.get("{{ path('app_dashboard_getlink') }}", { linkId: id}, function(data) {
 				var j = JSON.parse(data.data);
 				$.each(j, function(index, value) {
-					$("#tile_" + index).val(value)
+					$("#link_" + index).val(value)
         		});
 
 			});
@@ -59,7 +59,7 @@ $(function() {
 
 
 	// create or update
-	$("form[name=tile]").on('submit', function(e) {
+	$("form[name=link]").on('submit', function(e) {
 		e.preventDefault();
 		let data = {};
         $(this).serializeArray().forEach((object)=>{
@@ -76,8 +76,8 @@ $(function() {
             	value.forEach(function(errro) {
             		errorHtml.append("<li>" + errro + "</li>");
         		});
-            	$("#tile_" + index).after(errorHtml);
-            	$("#tile_" + index).addClass('b-c-r');
+            	$("#link_" + index).after(errorHtml);
+            	$("#link_" + index).addClass('b-c-r');
             });
 		}).done(function(data) {
 			location.reload();

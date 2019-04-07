@@ -3,7 +3,7 @@
 namespace App\Form;
 
 
-use App\Entity\Tile;
+use App\Entity\Link;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TileType extends AbstractType {
+class LinkType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $bookmarks = $options['data']['bookmarks'];
@@ -51,7 +51,7 @@ class TileType extends AbstractType {
 
     public function configureOption(OptionsResolver $resolver) {
         $resolver->setDefaults([
-            'data_class' => Tile::class,
+            'data_class' => Link::class,
         ]);
     }
 }
