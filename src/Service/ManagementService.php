@@ -44,6 +44,20 @@ class ManagementService {
         $this->getBookmarkRepository()->delete($bookmark);
     }
 
+
+
+    public function saveLink(Tile $link) {
+        return $this->getTileRepository()->save($link);
+    }
+
+    public function deleteLink(Tile $tile) {
+        return $this->getTileRepository()->delete($tile);
+    }
+
+    public function getLinkById($id) {
+        return $this->getTileRepository()->find($id);
+    }
+
     /**
      * @return BookmarkRepository
      */

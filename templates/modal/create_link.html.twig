@@ -1,14 +1,17 @@
 <div class="modal-dialog modal-lg create-link" style="display:none">
 	<div class="modal-content">
-		{% form_theme form 'form/fields.html.twig' %}
-        {{ form_start(form) }}
+		{% form_theme formLink 'form/fields.html.twig' %}
+        {{ form_start(formLink) }}
 		<div class="modal-header"><h3>Create new Link</h3></div>
 		<div class="modal-body">
-            {{ form_row(form.name) }}
-            {{ form_row(form.icon) }}
+            {{ form_row(formLink.name) }}
+            {{ form_row(formLink.icon) }}
+            {{ form_row(formLink.link) }}
+            {{ form_row(formLink.newWindow) }}
+            {{ form_row(formLink.bookmark) }}
         </div>
-   		<div class="modal-footer">{{ form_row(form.save) }}</div>
-        {{ form_end(form) }}
+   		<div class="modal-footer">{{ form_row(formLink.save) }}</div>
+        {{ form_end(formLink) }}
     </div>
 </div>
 <div class="modal-backdrop fade show" style="display:none"></div>
@@ -47,7 +50,7 @@ $(function() {
 			$.get("{{ path('app_dashboard_getlink') }}", { linkId: id}, function(data) {
 				var j = JSON.parse(data.data);
 				$.each(j, function(index, value) {
-					$("#link_" + index).val(value)
+					$("#tile_" + index).val(value)
         		});
 
 			});
@@ -56,14 +59,16 @@ $(function() {
 
 
 	// create or update
-	$("form[name=link]").on('submit', function(e) {
+	$("form[name=tile]").on('submit', function(e) {
 		e.preventDefault();
 		let data = {};
         $(this).serializeArray().forEach((object)=>{
             var key = object.name.substring(object.name.lastIndexOf("[") + 1, object.name.lastIndexOf("]"));
-      		data[key] =  object.value;
+            data[key] =  object.value;
         });
-
+//         data['bookmarkId'] = $(this).attr("data-bookmark-id");
+//         console.log($(this));
+//         var bookmarkId = $(this).attr("data-bookmark-id");
 		$.post("{{ path('app_dashboard_createlink') }}", JSON.stringify(data))
 		.fail(function(data) {
             $.each(JSON.parse(data.responseJSON.errors),function(index, value){
@@ -71,8 +76,8 @@ $(function() {
             	value.forEach(function(errro) {
             		errorHtml.append("<li>" + errro + "</li>");
         		});
-            	$("#link_" + index).after(errorHtml);
-            	$("#link_" + index).addClass('b-c-r');
+            	$("#tile_" + index).after(errorHtml);
+            	$("#tile_" + index).addClass('b-c-r');
             });
 		}).done(function(data) {
 			location.reload();

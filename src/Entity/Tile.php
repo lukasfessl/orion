@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TileRepository")
@@ -18,11 +19,13 @@ class Tile {
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $link;
 
@@ -33,6 +36,7 @@ class Tile {
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Bookmark", inversedBy="tile")
+     * @Assert\NotBlank
      */
     private $bookmark;
 
