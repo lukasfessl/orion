@@ -33,7 +33,7 @@ class BookmarkController extends Controller {
             ], 400);
         }
         $bookmark = $managementService->saveBookmark($bookmark);
-
+        $this->get('session')->getFlashBag()->add('success', "Bookmark was saved.");
         return new JsonResponse();
     }
 
@@ -65,7 +65,7 @@ class BookmarkController extends Controller {
         $bookmark = $managementService->getBookmarkById($bookmarkId);
         // TODO add check to user
         $managementService->deleteBookmark($bookmark);
-
+        $this->get('session')->getFlashBag()->add('success', "Bookmark was deleted.");
         return new JsonResponse([
             'data' => 'ok'
         ]);

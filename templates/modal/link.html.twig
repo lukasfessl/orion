@@ -4,9 +4,9 @@
         {{ form_start(formLink) }}
 		<div class="modal-header"><h3>Create new Link</h3></div>
 		<div class="modal-body">
+            {{ form_row(formLink.link) }}
             {{ form_row(formLink.name) }}
             {{ form_row(formLink.icon) }}
-            {{ form_row(formLink.link) }}
             {{ form_row(formLink.newWindow) }}
             {{ form_row(formLink.bookmark) }}
         </div>

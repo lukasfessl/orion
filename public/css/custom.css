@@ -33,3 +33,46 @@ ul {
 .w-a {
 	width: auto
 }
+
+.flash-wrap {
+	position: fixed;
+    top: 10px;
+    left: 50%;
+    z-index: 100;
+    z-index: 100;
+    width: 1px;
+    text-align: center;
+}
+
+.flash {
+	width: 200px;
+	border-radius: 3px;
+	padding: 10px 20px;
+	background-color: white;
+	margin-left: -100px;
+	display: inline-flex;
+}
+
+.flash span {
+	margin: 2px 10px;
+}
+
+.flash-success {
+	color: white;
+	background-color: #77a248;
+}
+
+.flash-error {
+	color: white;
+	background-color: #ca433b;
+}
+
+.flash-info {
+	color: white;
+	background-color: #6babe0;
+}
+
+.flash-warning {
+	color: white;
+	background-color: #e9a33c;
+}

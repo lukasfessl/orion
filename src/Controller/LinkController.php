@@ -35,6 +35,7 @@ class LinkController extends Controller {
         $link->setBookmark($bookmark);
 
         $bookmark = $managementService->saveLink($link);
+        $this->get('session')->getFlashBag()->add('success', "Link was saved.");
         return new JsonResponse();
     }
 
@@ -66,7 +67,7 @@ class LinkController extends Controller {
         $link = $managementService->getLinkById($linkId);
         // TODO add check to user
         $managementService->deleteLink($link);
-
+        $this->get('session')->getFlashBag()->add('success', "Link was deleted.");
         return new JsonResponse([
             'data' => 'ok'
         ]);
