@@ -60,13 +60,15 @@ class PageScannerController extends Controller {
             }
         }
 
-        if ($favicon == null) {
-            if (get_headers($urlShort . "/favicon.ico")) {
-                $favicon = $urlShort . "/favicon.ico";
-            } else if (get_headers($urlShort . "/favicon.png")) {
-                $favicon = $urlShort . "/favicon.png";
-            }
-        }
+//         TODO: fix this
+//         if ($favicon == null) {
+//             if (get_headers($urlShort . "/favicon.ico")) {
+//                 $favicon = $urlShort . "/favicon.ico";
+//             } else if (get_headers($urlShort . "/favicon.png")) {
+//                 $favicon = $urlShort . "/favicon.png";
+//             }
+//         }
+
 
         if ($favicon != null && substr($favicon, 0, 4 ) != "http") {
             if (substr($favicon, 0, 1 ) != "/") {

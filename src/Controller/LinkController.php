@@ -49,7 +49,7 @@ class LinkController extends Controller {
         $link = $managementService->getLinkById($linkId);
         // TODO add check to user
         $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
-        $link->setBookmark(null);
+        $link->setBookmark($link->getBookmark()->getId());
         $data = $serializer->serialize($link, 'json');
 
         return new JsonResponse([

@@ -21,6 +21,17 @@
 <script>
 
 $(function() {
+
+	$("#link_link").change(function() {
+		var url = $(this).val();
+		$.get("{{ path('scan') }}", {url: url})
+			.done(function(data) {
+				$("#link_name").val(data.title);
+				$("#link_icon").val(data.favicon);
+		})
+	});
+
+
 	$(".modal-backdrop").click(function() {
 		$(".create-link").hide();
 		$(".modal-backdrop").hide();
@@ -50,7 +61,7 @@ $(function() {
 			$.get("{{ path('getLink') }}", { linkId: id}, function(data) {
 				var j = JSON.parse(data.data);
 				$.each(j, function(index, value) {
-					$("#link_" + index).val(value)
+					$("#link_" + index).val(value);
         		});
 
 			});
